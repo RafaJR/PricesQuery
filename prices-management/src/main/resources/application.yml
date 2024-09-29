@@ -1,0 +1,14 @@
+# Spring configuration
+spring:
+    application:
+        name: prices-management
+    docker:
+        compose:
+            enabled: false
+    profiles:
+        #    active: local
+        active: "@spring.profiles.active@"
+    ## Indicamos de donde tiene que coger la configuracion en arranque
+    cloud:
+        config:
+            enabled: false

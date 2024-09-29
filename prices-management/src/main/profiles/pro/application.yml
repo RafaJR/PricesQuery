@@ -1,0 +1,10 @@
+# Server configuration
+server:
+    port: 8082
+# Spring configuration
+spring:
+    application:
+        name: prices-management
+    docker:
+        compose:
+            enabled: false

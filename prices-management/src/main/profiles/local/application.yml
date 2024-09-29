@@ -1,0 +1,33 @@
+# Server configuration
+server:
+    port: 8080
+# Spring configuration
+spring:
+    application:
+        name: prices-management
+    docker:
+        compose:
+            enabled: false
+    profiles:
+        #    active: local
+        active: "@spring.profiles.active@"
+    ## Indicamos de donde tiene que coger la configuracion en arranque
+    cloud:
+        config:
+            enabled: false
+    ## Configuración de base de datos en memoria H2
+    datasource:
+        url: jdbc:h2:mem:pricesmanagementdb
+        #url: jdbc:h2:file:/home/raido/Dropbox/Programacion/Java/EntornosDeDesarrollo/data
+        driverClassName: org.h2.Driver
+        username: admin
+        password:
+        h2:
+            console:
+                enabled: true
+            # console URL: http://localhost:8080/h2-console
+        jpa:
+            database-platform: org.hibernate.dialect.H2Dialect
+            hibernate:
+                ddl-auto: update
+                show-sql: true

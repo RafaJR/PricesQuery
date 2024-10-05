@@ -259,6 +259,11 @@ representar las relaciones y las claves foráneas entre las tablas.
 
 ### Algunas explicaciones sobre campos específicos
 
+Algunos campos de las tablas se han incluido siguiendo criterios no especificados en la documentación de requerimientos
+y, por tanto, requieren de cierta explicación.
+
+#### Campo "CURR" de la tabla "PRICES" - Denominación 'ISO' de la moneda en que se expresa el precio
+
 Para dar contendio restringido de manera coherente al campo "CURR" de la tabla "PRICES", que ha de contener el
 identificativo ISO de la moneda en la que se expresa el precio, se ha empleado un "enum".
 Este "enum" contiene los identificadores ISO de las posibles monedas en que el precio puede expresarse. Como no tenemos
@@ -266,4 +271,50 @@ pleno conocimiento de las monedas que Inditex puede aceptar a día de hoy o en f
 monedas de curso legal existentes en el mundo en el tiempo presente.
 Esta medida implica un consumo de memoria elevado en la ejecución, pero se ha considerado que esto simplifica el
 desarrollo por ahorrar el uso de una tabla extra en base de datos y que, para una posible 'release' final, el contenido
-del "enum" podría acotarse a las monedas de uso real para ahorrar recursos de máquina.  
+del "enum" podría acotarse a las monedas de uso real para ahorrar recursos de máquina.
+
+#### Campo "PRICE" de la tabla "PRICES" - Precio definitivo de un producto
+
+El campo "PRICE" de la tabla "PRICES" debe contener el valor númerico de un precio, por lo que no ha de ser un número de
+gran tamaño ni debe contener más de dos decimales. Sin embargo, se ha optado por "mapear" este campo en "JPA" como un
+tipo "BigDecimal" en lugar de un tipo más pequeño como "Double". Esto implica un mayor consumo de recursos aparentemente
+innecesario, pero hay buenas razones para adoptar esta medida de cara a la mantenibilidad y capacidad evolutiva del
+código:
+
+##### Precisión y Exactitud
+
+La principal razón para utilizar "BigDecimal" en lugar de "Double" o "float" es la precisión y la exactitud que
+"BigDecimal" ofrece en los cálculos con números decimales. BigDecimal permite un control muy fino sobre la precisión,
+el cual es esencial en operaciones financieras donde incluso un pequeño error puede resultar en una discrepancia
+significativa.
+
+##### Problema con los Tipos de Datos de Punto Flotante
+
+Los tipos de datos de punto flotante (float y double) utilizan una representación binaria en la memoria que no puede
+representar con precisión todos los números decimales exactos.
+
+##### Control sobre el Redondeo
+
+Otra ventaja significativa de usar BigDecimal es el control que proporciona sobre el redondeo de los números. En
+aplicaciones financieras, diferentes situaciones pueden requerir diferentes estrategias de redondeo (por ejemplo,
+redondeo hacia arriba, redondeo hacia abajo, redondeo al número par más cercano, etc.).
+
+Si bien es cierto que no se requieren operaciones de cálculo con precios para cumplir con los requerimientos
+especificados en la actualidad, esta medida contribuye a la mantenibilidad y la capacidad evolutiva del código de cara
+al desarrollo futuro. Es previsible que este tipo de operaciones de cálculo financiero sean necesarias en futuros
+desarrollo y el tipo "BigDecimal" es idónea para los mismos.
+
+### Especificaciones de desarrollo para la capa de datos
+
+Se ha aplicado la implementación de 'Hibernate' para el modelo 'JPA' en el mapeo objeto-relacional de las entidades.
+Se ha adjudicado a 'JPA' la tarea de generar las tabla de la base de datos, durante el proceso de arranque del servidio,
+seǵun el modelo establecido en las entidades.
+
+Para la carga de datos iniciales para las pruebas requeridas se ha aplicado el 'flyway' como 'framework'.
+
+Se ha aplicado una configuración particular para hacer compatible la generación autómatica de tablas por parte de 'JPA'
+con la carga de datos por parte de 'flyway', de modo que esta carga no se produzca hasta después de que 'JPA' genere
+las tablas. Con este fin, se ha deshabilitado la participación de 'flyway' en la configuración inicial y se ha aplicado
+un "Listener" para, en el momento en el que haya concluido satisfactoriamente el arranque del servicio, reescribir la
+configuración del 'bean' de 'flyway' al vuelo y emplearlo para la carga de datos. Para esta carga, 'flyway' dispondrá de
+una lista de ficheros ".sql" que harán efectuarán la inserción de datos.

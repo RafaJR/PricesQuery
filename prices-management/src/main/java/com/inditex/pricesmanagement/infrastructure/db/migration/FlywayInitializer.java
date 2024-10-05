@@ -1,4 +1,4 @@
-package com.inditex.pricesmanagement.infrastructure.config;
+package com.inditex.pricesmanagement.infrastructure.db.migration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
@@ -20,16 +20,15 @@ public class FlywayInitializer implements ApplicationListener<ApplicationReadyEv
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        FlywayInitializer.log.info("Iniciando el cambio de perfil a 'flyway-migrate' para la carga de datos.\n" +
-                environment.getProperty("spring.flyway.locations"));
 
-        // Cambiar al perfil flyway-migrate para realizar las migraciones
-        //environment.setActiveProfiles("flyway-migrate");
+        FlywayInitializer.log.info("Iniciando la configuración de 'flyway-migrate' para la carga de datos.");
 
-        // Reconfigurar Flyway con el nuevo perfil
         Flyway reconfiguredFlyway = Flyway.configure()
-                .dataSource("jdbc:h2:mem:pricesmanagementdb", "admin", "")
-                .locations("classpath:db/migration")
+                .dataSource(
+                        environment.getProperty("spring.datasource.url"),
+                        environment.getProperty("spring.datasource.username"),
+                        environment.getProperty("spring.datasource.password"))
+                .locations(environment.getProperty("spring.flyway.locations"))
                 .baselineOnMigrate(true)
                 .load();
 
@@ -37,8 +36,6 @@ public class FlywayInitializer implements ApplicationListener<ApplicationReadyEv
                 Arrays.stream(reconfiguredFlyway.info().pending())
                         .map(script -> script.getScript()).collect(Collectors.joining(",")));
 
-        // Migrar la base de datos
-        //reconfiguredFlyway.baseline();
         reconfiguredFlyway.migrate();
 
         FlywayInitializer.log.info("Migraciones de Flyway completadas.");

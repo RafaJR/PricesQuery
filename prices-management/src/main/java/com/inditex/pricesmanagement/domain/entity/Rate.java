@@ -9,7 +9,7 @@ import lombok.*;
 import java.util.Set;
 
 @Entity(name = "rates")
-@Table(name = "rateS")
+@Table(name = "RATES")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

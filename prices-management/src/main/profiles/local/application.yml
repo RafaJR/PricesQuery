@@ -37,7 +37,7 @@ spring:
   #    allow-bean-definition-overriding: true
   flyway:
     enabled: false
-#    locations: classpath:db/migration
-#    baseline-on-migrate: true
-#    # Se deshabilita la ejecución de flyway al inicio para evitar que se ejecuten los archivos '.sql' antes de que JPA haya generado las tablas
-#    clean-disabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    # Se deshabilita la ejecución de flyway al inicio para evitar que se ejecuten los archivos '.sql' antes de que JPA haya generado las tablas
+    clean-disabled: true

@@ -7,6 +7,7 @@ public final class PricesManagementConstants {
      */
     // Mensaje de aviso de servicio levantado
     public static final String SERVICE_HEALTH_STATE = "El servicio de gestión de precios y tarifas está activo y funcionando correctamente.";
+    public static final String SERVICE_HEALTH_HTTP_MESSAGE = "Llamada al servicio de comprobación de estado correcta.";
     /**
      * Constantes para la representación de datos
      */

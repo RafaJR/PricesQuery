@@ -6,6 +6,7 @@ Microservicio para la gestión de tarifas y precios de productos de cadenas de I
 
 - [Instrucciones para el arranque y ejecución del servicio](#instrucciones-para-el-arranque-y-ejecución-del-servicio)
 - [Instrucciones para realización de pruebas unitarias y de integración](#instrucciones-para-realización-de-pruebas-unitarias-y-de-integración)
+- [Instrucciones para la explotación del servicio](#instrucciones-para-la-explotación-del-servicio)
 - [Algunas indicaciones sobre el desarrollo](#algunas-indicaciones-sobre-el-desarrollo)
 - [Diseño de la base de datos](#diseño-de-la-base-de-datos)
 
@@ -78,6 +79,83 @@ integración bastará con compilar con maven:
     mvn clean install -P local
 
 También es posible ejecutar los tests por separado.
+
+## Instrucciones para la explotación del servicio
+
+A continuación se proporciona una guía detallada para acceder a los endpoints del servicio REST prices-management
+desplegado localmente en "localhost:8080", así como instrucciones para realizar pruebas funcionales utilizando Postman.
+
+### Endpoints Disponibles
+
+Este es el menú de funcionalidades disponbles a través de los "endpoints".
+
+#### Health Check Endpoint
+
+- Descripción: Este endpoint se utiliza para verificar el estado de salud del servicio.
+- URL: http://localhost:8080/api/health
+- Método HTTP: GET
+- Funcionalidad: Retorna un mensaje indicando que el servicio está funcionando correctamente.
+- Posibles Respuestas
+    - 200 OK:
+  ```
+      {
+          "status": "OK",
+          "statusCode": 200,
+          "message": "Service is healthy",
+          "data": "UP",
+          "success": true
+      }
+  ```
+
+#### Price Search Endpoint
+
+- Descripción: Este endpoint se utiliza para buscar precios basados en la fecha, producto y marca.
+- URL: http://localhost:8080/api/prices/search
+- Método HTTP: GET
+- Funcionalidad: Busca y retorna precios de acuerdo a los criterios especificados en el cuerpo de la petición.
+- Posibles Respuestas
+    - 200 OK
+  ````
+      {
+        "status": "OK",
+        "statusCode": 200,
+        "message": "Data retrieved successfully",
+        "success": true,
+        "data": [
+            // Resultados de la consulta
+        ]
+     }
+  ````
+    - 404 Not Found
+  ````
+      {
+        "status": "NOT_FOUND",
+        "statusCode": 404,
+        "message": "Resource not found",
+        "success": false,
+        "data": null
+    }
+  ````
+    - 500 Internal Server Error
+  ````
+      {
+        "status": "INTERNAL_SERVER_ERROR",
+        "statusCode": 500,
+        "message": "An error occurred while processing the request",
+        "success": false,
+        "data": null
+    }
+  ````
+
+### Pruebas Funcionales con Postman
+
+En la carpeta "resources/postman" del proyecto, existe un archivo llamado
+"202409291053-prices-management.postman_collection.json" que contiene pruebas funcionales para el servicio REST.
+Está listo para ser importado a "Postman" y probar los "endpoints" del servicio desplegado en el ámbito local "
+localhost:8080"
+Las pruebas incluidas en la colección Postman se corresponden con las solicitadas en el documento de requisitos del
+proyecto. Estas pruebas cubren los escenarios necesarios para validar el correcto funcionamiento de los endpoints
+"HealthCheck y PriceSearch".
 
 ## Algunas indicaciones sobre el desarrollo
 

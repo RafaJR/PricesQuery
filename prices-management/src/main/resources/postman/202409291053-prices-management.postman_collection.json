@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "50f62c60-4ee3-44b1-996a-57778e18d01b",
+		"name": "202409291053-prices-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8320203"
+	},
+	"item": [
+		{
+			"name": "healthRequest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2020-06-14-10.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2020-06-14-16.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2020-06-14-21.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios 4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2020-06-15-10.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios 5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2020-06-16-21.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios 6",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2021-06-16-21.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de precios Junit",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"applicationDate\": \"2020-06-14-10.00.00\",\n    \"productId\": 35455,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/prices/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"prices",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

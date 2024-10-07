@@ -78,7 +78,29 @@ integración bastará con compilar con maven:
 
     mvn clean install -P local
 
-También es posible ejecutar los tests por separado.
+También es posible ejecutar los tests por separado desde el entorno de programación, como InteliJ.
+
+### Aclaraciones sobre los tests de integración
+
+Se han incorporado seis test de integración que funcionan cargando el servicio al completo con todo su contexto,
+incluyendo la base de datos en memoria y los datos de prueba.
+
+Se ha usado un archivo especial que realiza una operación "merge" (carga los datos en caso de no existan o los deja como
+están en caso de que ya existan) sobre la base de datos que garantiza la presencia de
+los datos de prueba, independientemente de que 'flyway' se haya cargado o no.
+
+Estos test comprueban el normal funcionamiento de los "endpoints" haciendo llamadas efectivas a los mismos de modo
+similar a cómo se haría en un entorno de ejecuicón real. A continuación, siguiendo las indicaciones del documento de
+requisitos, se comprueba la presencia de los datos correspondientes a las consltas sugeridas, que son:
+
+- Petición a las 10:00 del día 14 de Junio, del producto 35455 para la brand 1 (ZARA)
+- Petición a las 16:00 del día 14 de Junio, del producto 35455 para la brand 1 (ZARA)
+- Petición a las 21:00 del día 14 de Junio, del producto 35455 para la brand 1 (ZARA)
+- Petición a las 10:00 del día 15 de Junio, del producto 35455 para la brand 1 (ZARA)
+- Petición a las 21:00 del día 16 de Junio, del producto 35455 para la brand 1 (ZARA)
+
+Estas peticiones son equivalentes a las que encontramos disponibles en la colección "postman" suministrada en este mismo
+proyecto. Véanse más detalles sobre la colección "postman" en el apartado "Pruebas Funcionales con Postman".
 
 ## Instrucciones para la explotación del servicio
 
@@ -111,7 +133,7 @@ Este es el menú de funcionalidades disponbles a través de los "endpoints".
 
 - Descripción: Este endpoint se utiliza para buscar precios basados en la fecha, producto y marca.
 - URL: http://localhost:8080/api/prices/search
-- Método HTTP: GET
+- Método HTTP: POST
 - Funcionalidad: Busca y retorna precios de acuerdo a los criterios especificados en el cuerpo de la petición.
 - Posibles Respuestas
     - 200 OK
@@ -146,6 +168,21 @@ Este es el menú de funcionalidades disponbles a través de los "endpoints".
         "data": null
     }
   ````
+
+##### Aclaración sobre el vervo "POST" en las peticiones de consultas de precios
+
+Tal vez resulte extraño el uso del verbo "POST" en lugar de "GET" en una petición que tan solo tiene que leer datos del
+sistema, no introducir un cambio en el mismo.
+
+Sin embargo, dado que se ha optado por introducir los datos de filtrado de la consulta en el "body" de la petición, es
+más apropiado usar el vervo "POST" ya que este es el que espera recibir el protocolo "HTTP" en caso de peticiones con
+datos estructurados en el "body". Aún así, las peticiones podrían seguir funcionando si se usara "GET", pero podríamos
+tener problemas a la hora de emular estas peticiones en los tests de integración.
+
+La realización del filtrado por medio de datos estructurados en el "body" en lugar de por parámetros de "url" tiene
+ciertas ventajas, como la mayor seguridad por no tener los datos de consulta totalmente expuestos a la vista, la
+facilidad de tratamiento programaico al poder guardarlos en clases serializables o la posibilidad de guardar estos
+filtros en colas de mensajería si fuese necesario.
 
 ### Pruebas Funcionales con Postman
 

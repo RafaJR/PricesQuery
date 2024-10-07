@@ -74,7 +74,7 @@ public class PriceControllerIntegrationTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().isSuccess()).isTrue();
-        assertThat(((List) response.getBody().getData()).size()).isGreaterThan(0);
+        assertThat(((List) response.getBody().getData())).isNotEmpty();
     }
 
     // Test 2: petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA)
@@ -112,7 +112,7 @@ public class PriceControllerIntegrationTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().isSuccess()).isTrue();
-        assertThat(((List) response.getBody().getData()).size()).isGreaterThan(0);
+        assertThat(((List) response.getBody().getData())).isNotEmpty();
     }
 
     // Test 3: petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA)
@@ -150,7 +150,7 @@ public class PriceControllerIntegrationTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().isSuccess()).isTrue();
-        assertThat(((List) response.getBody().getData()).size()).isGreaterThan(0);
+        assertThat(((List) response.getBody().getData())).isNotEmpty();
     }
 
     // Test 4: petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA)
@@ -188,7 +188,7 @@ public class PriceControllerIntegrationTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().isSuccess()).isTrue();
-        assertThat(((List) response.getBody().getData()).size()).isGreaterThan(0);
+        assertThat(((List) response.getBody().getData())).isNotEmpty();
     }
 
     // Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA)
@@ -226,7 +226,7 @@ public class PriceControllerIntegrationTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().isSuccess()).isTrue();
-        assertThat(((List) response.getBody().getData()).size()).isGreaterThan(0);
+        assertThat(((List) response.getBody().getData())).isNotEmpty();
     }
 
 

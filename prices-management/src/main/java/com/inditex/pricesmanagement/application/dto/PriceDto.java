@@ -8,6 +8,7 @@ import com.inditex.pricesmanagement.infrastructure.util.PricesManagementConstant
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 @Builder
 public class PriceDto implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore

@@ -47,7 +47,7 @@ public class Price {
     @Positive
     @Column(name = "PRICE", nullable = false, precision = 10, scale = 2)
     @JsonProperty("price")
-    private BigDecimal price;
+    private BigDecimal finalPrice;
 
     @NotNull
     @Column(name = "PRIORITY", nullable = false)

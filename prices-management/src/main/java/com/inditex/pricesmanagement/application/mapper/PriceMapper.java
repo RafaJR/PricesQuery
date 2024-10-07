@@ -13,6 +13,10 @@ import java.util.Objects;
  */
 public class PriceMapper {
 
+    private PriceMapper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static PriceDto toDto(Price price) {
         if (Objects.isNull(price)) return null;
 
@@ -21,7 +25,7 @@ public class PriceMapper {
                 .startDate(price.getStartDate())
                 .endDate(price.getEndDate())
                 .currency(price.getCurrency())
-                .price(price.getPrice())
+                .price(price.getFinalPrice())
                 .priority(price.getPriority())
                 .brandId(price.getBrand() != null ? price.getBrand().getBrandId() : null)
                 .priceList(price.getPriceList() != null ? price.getPriceList().getRateId() : null)
@@ -37,7 +41,7 @@ public class PriceMapper {
                 .startDate(priceDto.getStartDate())
                 .endDate(priceDto.getEndDate())
                 .currency(priceDto.getCurrency())
-                .price(priceDto.getPrice())
+                .finalPrice(priceDto.getPrice())
                 .priority(priceDto.getPriority())
                 .build();
 

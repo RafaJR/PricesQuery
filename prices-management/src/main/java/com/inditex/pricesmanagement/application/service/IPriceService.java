@@ -1,4 +1,4 @@
-package com.inditex.pricesmanagement.domain.service;
+package com.inditex.pricesmanagement.application.service;
 
 import com.inditex.pricesmanagement.application.dto.PriceDto;
 import com.inditex.pricesmanagement.application.dto.PriceQueryInputDto;

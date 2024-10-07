@@ -3,7 +3,7 @@ package com.inditex.pricesmanagement.infrastructure.controller;
 import com.inditex.pricesmanagement.application.dto.PriceDto;
 import com.inditex.pricesmanagement.application.dto.PriceQueryInputDto;
 import com.inditex.pricesmanagement.application.dto.commons.ApiResponseDto;
-import com.inditex.pricesmanagement.domain.service.PriceServiceImpl;
+import com.inditex.pricesmanagement.application.service.PriceServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

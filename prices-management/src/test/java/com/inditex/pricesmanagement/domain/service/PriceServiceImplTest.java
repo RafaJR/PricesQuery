@@ -2,6 +2,7 @@ package com.inditex.pricesmanagement.domain.service;
 
 import com.inditex.pricesmanagement.application.dto.PriceDto;
 import com.inditex.pricesmanagement.application.dto.PriceQueryInputDto;
+import com.inditex.pricesmanagement.application.service.PriceServiceImpl;
 import com.inditex.pricesmanagement.domain.entity.Price;
 import com.inditex.pricesmanagement.domain.repository.PriceRepository;
 import org.junit.jupiter.api.Test;

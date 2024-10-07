@@ -6,6 +6,7 @@ import com.inditex.pricesmanagement.infrastructure.util.PricesManagementConstant
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 public class PriceQueryInputDto implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @NotNull

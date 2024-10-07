@@ -1,4 +1,4 @@
-package com.inditex.pricesmanagement.domain.service;
+package com.inditex.pricesmanagement.application.service;
 
 import com.inditex.pricesmanagement.application.dto.PriceDto;
 import com.inditex.pricesmanagement.application.dto.PriceQueryInputDto;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PriceServiceImpl implements IPriceService {
@@ -33,7 +32,7 @@ public class PriceServiceImpl implements IPriceService {
 
         return priceEntities.stream()
                 .map(PriceMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -47,6 +46,6 @@ public class PriceServiceImpl implements IPriceService {
 
         return priceEntities.stream()
                 .map(PriceMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

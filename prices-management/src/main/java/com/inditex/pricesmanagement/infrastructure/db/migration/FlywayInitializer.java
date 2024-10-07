@@ -2,6 +2,7 @@ package com.inditex.pricesmanagement.infrastructure.db.migration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.MigrationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -15,8 +16,12 @@ import java.util.stream.Collectors;
 @Slf4j
 public class FlywayInitializer implements ApplicationListener<ApplicationReadyEvent> {
 
+    private final ConfigurableEnvironment environment;
+
     @Autowired
-    private ConfigurableEnvironment environment;
+    public FlywayInitializer(ConfigurableEnvironment environment) {
+        this.environment = environment;
+    }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -34,7 +39,7 @@ public class FlywayInitializer implements ApplicationListener<ApplicationReadyEv
 
         FlywayInitializer.log.info("Se van a carcar estos archivos de datos: {}",
                 Arrays.stream(reconfiguredFlyway.info().pending())
-                        .map(script -> script.getScript()).collect(Collectors.joining(",")));
+                        .map(MigrationInfo::getScript).collect(Collectors.joining(",")));
 
         reconfiguredFlyway.migrate();
 

@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -28,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestPropertySource(locations = "classpath:application-test.yml")
+@Sql(scripts = "/db/migration/InitDataChargeTest.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Slf4j
 public class PriceControllerIntegrationTest {
 

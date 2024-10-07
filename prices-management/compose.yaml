@@ -1,1 +1,20 @@
 services:
+  back:
+    build:
+      dockerfile: Dockerfile
+      args:
+        MVN_PROFILE: local
+    container_name: $APPLICATION_NAME
+    logging:
+      options:
+        max-size: 100m
+    deploy:
+      resources:
+        limits:
+          memory: ${MEMORY_LIMIT:-2000m}
+    #    ports:
+    #      - 8092:8092
+    environment:
+      TZ: Europe/Madrid
+      #      PORT: 8080
+      JAVA_OPTS: "-XX:+UseContainerSupport -XshowSettings:vm -Xmx${MEMORY_LIMIT:-2000m}"
